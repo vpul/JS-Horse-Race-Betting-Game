@@ -33,7 +33,6 @@ document.getElementById('start').onclick = function () {
         horse.classList.add("runRight");
         horse.classList.remove("standRight");
         horseProp[horseNo].left = 20;
-        steps = 0;
         moveRight(horse, horseNo);
         horseNo++;
     }
@@ -45,10 +44,10 @@ function moveRight(horse, horseNo) {
     horse.style.left = horseProp[horseNo].left + "vw";
     if (horseProp[horseNo].left < 82.5 - (horseNo+1) * 2.5) {
         moveRight(horse, horseNo);
-        steps++;
-        console.log("Steps for #horse" + horseNo + "=" + steps);
     } else {
         horseProp[horseNo].top = 68;
+        horse.classList.remove("runRight");
+        horse.classList.add("runUp");
         moveUp(horse, horseNo);
     }
   }, 500 / (Math.random() * 10 + 10));
@@ -56,30 +55,42 @@ function moveRight(horse, horseNo) {
 
 function moveUp(horse, horseNo) {
     setTimeout(() => {
-        horse.classList.remove("runRight");
-        horse.classList.add("runUp");
         horseProp[horseNo].top --;
         horse.style.top = horseProp[horseNo].top + "vh";
         if (horseProp[horseNo].top > 0 + horseNo * 4) {
-          moveUp(horse, horseNo);
+            moveUp(horse, horseNo);
         } else {
-          //moveLeft();
+            horse.classList.remove("runUp");
+            horse.classList.add("runLeft");
+            moveLeft(horse, horseNo);
         }
-
     }, 500 / (Math.random() * 10 + 10));
 }
 
-function moveLeft(horse, y, originY, horseNo) {
-  console.log(y);
-  setTimeout(() => {
-    horse.classList.remove("runRight");
-    horse.classList.add("runUp");
-    y--;
-    horse.style.top = y + "vh";
-    if (y > 0 + horseNo * 4) {
-      moveUp(horse, y, originY, horseNo);
-    } else {
-      moveLeft();
-    }
-  }, 500 / (Math.random() * 10 + 10));
+function moveLeft(horse, horseNo) {
+    setTimeout(() => {
+        horseProp[horseNo].left--;
+        horse.style.left = horseProp[horseNo].left + "vw";
+        if (horseProp[horseNo].left > 12 - (horseNo + 1) * 2.5) {
+            moveLeft(horse, horseNo);
+        } else {
+            horse.classList.remove("runLeft");
+            horse.classList.add("runDown");
+            moveDown(horse, horseNo);
+        }
+    }, 500 / (Math.random() * 10 + 10));
+}
+
+function moveDown(horse, horseNo) {
+    setTimeout(() => {
+        horseProp[horseNo].top++;
+        horse.style.top = horseProp[horseNo].top + "vh";
+        if (horseProp[horseNo].top < 65 + horseNo * 4 ) {
+            moveDown(horse, horseNo);
+        } else {
+            //horse.classList.remove("runUp");
+            //horse.classList.add("runLeft");
+            //moveLeft(horse, horseNo);
+        }
+    }, 500 / (Math.random() * 10 + 10));
 }
