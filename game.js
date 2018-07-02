@@ -22,9 +22,9 @@ var horseProp = [
     },
 ];
 
-var steps;
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
+    hideResult();
     var horses = document.getElementsByClassName("horse");
     //Running Animation and actual movement for every horse
     var horseNo = 0;   //Starting from horse #0
@@ -42,14 +42,23 @@ function moveRight(horse, horseNo) {
   setTimeout(() => {
     horseProp[horseNo].left ++;
     horse.style.left = horseProp[horseNo].left + "vw";
-    if (horseProp[horseNo].left < 82.5 - (horseNo+1) * 2.5) {
-        moveRight(horse, horseNo);
+    if (typeof horseProp[horseNo].top == "undefined") {
+        if (horseProp[horseNo].left < 82.5 - (horseNo + 1) * 2.5) {
+            moveRight(horse, horseNo);
+        } else {
+            horseProp[horseNo].top = 68;
+            horse.classList.remove("runRight");
+            horse.classList.add("runUp");
+            moveUp(horse, horseNo);
+        }
     } else {
-        horseProp[horseNo].top = 68;
-        horse.classList.remove("runRight");
-        horse.classList.add("runUp");
-        moveUp(horse, horseNo);
+        if (horseProp[horseNo].left < 30) {
+          moveRight(horse, horseNo);
+        } else {
+          //
+        }
     }
+    
   }, 500 / (Math.random() * 10 + 10));
 }
 
@@ -88,9 +97,14 @@ function moveDown(horse, horseNo) {
         if (horseProp[horseNo].top < 65 + horseNo * 4 ) {
             moveDown(horse, horseNo);
         } else {
-            //horse.classList.remove("runUp");
-            //horse.classList.add("runLeft");
-            //moveLeft(horse, horseNo);
+            horse.classList.remove("runDown");
+            horse.classList.add("runRight");
+            moveRight(horse, horseNo);
         }
     }, 500 / (Math.random() * 10 + 10));
+}
+
+//Disable 'Start Race' button and hide results during the actual race
+function hideResult() {
+    document.getElementById("start").disabled = true;
 }
