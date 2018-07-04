@@ -55,7 +55,7 @@ function moveRight(horse, horseNo) {
         if (horseProp[horseNo].left < 30) {
           moveRight(horse, horseNo);
         } else {
-          //
+            arrival(horse, horseNo);
         }
     }
     
@@ -107,4 +107,19 @@ function moveDown(horse, horseNo) {
 //Disable 'Start Race' button and hide results during the actual race
 function hideResult() {
     document.getElementById("start").disabled = true;
+    //
+    var resultIcons = document.querySelectorAll("tr td:nth-child(2)");
+    for (var i = 0; i < resultIcons.length; i++) {
+        resultIcons[i].className = "results";
+    }
+}
+
+function arrival(horse, horseNo) {
+    horse.classList.remove("runRight");
+    horse.classList.add("standRight");
+    horseProp[horseNo].top = undefined;
+    document.getElementById("start").disabled = false;
+    var resultIcons = document.getElementsByClassName("results");
+    horseNo++;
+    resultIcons[0].className = "horse"+horseNo;
 }
