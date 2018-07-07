@@ -22,11 +22,12 @@ var horseProp = [
     },
 ];
 
-var bethorse, amount;
+var bethorse, amount, funds;
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
     bethorse = document.getElementById('bethorse').value;
     amount = parseInt(document.getElementById('amount').value);
+    funds = parseInt(document.getElementById('funds').innerText);
     hideResult();
     var horses = document.getElementsByClassName("horse");
     //Running Animation and actual movement for every horse
@@ -125,8 +126,13 @@ function arrival(horse, horseNo) {
     var resultIcons = document.getElementsByClassName("results");
     horseNo++;  //Arrays start with index 0, but the class names start with index 1
     resultIcons[0].className = "horse"+horseNo;
-    if (resultIcons.length == 3 && bethorse == "horse" + horseNo) {
-      console.log("horse" + horseNo + "Won");
+    if (resultIcons.length == 3){
+        if(bethorse == "horse" + horseNo) {
+            funds+=amount; 
+            console.log("Won");
+        } else {
+            funds-=amount;
+        }
+        document.getElementById("funds").innerText = funds;
     }
-    console.log(resultIcons.length);
 }
