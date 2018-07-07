@@ -36,7 +36,7 @@ document.getElementById('start').onclick = function () {
     if (amount > funds) {
         alert("You do not have enough funds.");
         return 0;
-    } else if (lap < 1) {
+    } else if (laps < 1) {
         alert("Lap must be greater than 0.");
         return 0;
     } else if (amount < 1) {
@@ -64,7 +64,7 @@ function moveRight(horse, horseNo) {
         horseProp[horseNo].left ++;
         horse.style.left = horseProp[horseNo].left + "vw";
         if (horseProp[horseNo].laps > 0) {
-          if (horseProp[horseNo].left < 82.5 - (horseNo + 1) * 2.5) {
+          if (horseProp[horseNo].left < 72.5 + horseNo * 2.5) {
             moveRight(horse, horseNo);
           } else {
             horseProp[horseNo].top = 68;
@@ -86,7 +86,7 @@ function moveUp(horse, horseNo) {
     setTimeout(() => {
         horseProp[horseNo].top --;
         horse.style.top = horseProp[horseNo].top + "vh";
-        if (horseProp[horseNo].top > 0 + horseNo * 4) {
+        if (horseProp[horseNo].top > 4 + horseNo * 4) {
             moveUp(horse, horseNo);
         } else {
             horse.classList.remove("runUp");
@@ -100,7 +100,7 @@ function moveLeft(horse, horseNo) {
     setTimeout(() => {
         horseProp[horseNo].left--;
         horse.style.left = horseProp[horseNo].left + "vw";
-        if (horseProp[horseNo].left > 12 - (horseNo + 1) * 2.5) {
+        if (horseProp[horseNo].left > 3 + horseNo * 2.5) {
             moveLeft(horse, horseNo);
         } else {
             horse.classList.remove("runLeft");
@@ -114,7 +114,7 @@ function moveDown(horse, horseNo) {
     setTimeout(() => {
         horseProp[horseNo].top++;
         horse.style.top = horseProp[horseNo].top + "vh";
-        if (horseProp[horseNo].top < 65 + horseNo * 4 ) {
+        if (horseProp[horseNo].top < 68 + horseNo * 4 ) {
             moveDown(horse, horseNo);
         } else {
             horseProp[horseNo].laps--;
