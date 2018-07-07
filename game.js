@@ -22,11 +22,12 @@ var horseProp = [
     },
 ];
 
-var bethorse, amount, funds, lap=2;
+var bethorse, amount, funds, laps;
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
     bethorse = document.getElementById('bethorse').value;
     amount = parseInt(document.getElementById('amount').value);
+    laps = parseInt(document.getElementById('laps').value);
     funds = parseInt(document.getElementById('funds').innerText);
     hideResult();
     var horses = document.getElementsByClassName("horse");
@@ -46,7 +47,7 @@ function moveRight(horse, horseNo) {
     setTimeout(() => {
         horseProp[horseNo].left ++;
         horse.style.left = horseProp[horseNo].left + "vw";
-        if (lap>0) {
+        if (laps>0) {
             if (horseProp[horseNo].left < 82.5 - (horseNo + 1) * 2.5) {
                 moveRight(horse, horseNo);
             } else {
@@ -100,10 +101,9 @@ function moveDown(horse, horseNo) {
         if (horseProp[horseNo].top < 65 + horseNo * 4 ) {
             moveDown(horse, horseNo);
         } else {
-            //Following code ensures that lap count is reduced only once per lap
-            if (horseNo == 0) { //lap is reduced only in the case of 1st horse
-                lap--;
-                console.log(lap);
+            //Following code ensures that laps count is reduced only once per laps
+            if (horseNo == 0) { //laps is reduced only in the case of 1st horse
+                laps--;
             }
             horse.classList.remove("runDown");
             horse.classList.add("runRight");
@@ -132,8 +132,7 @@ function arrival(horse, horseNo) {
     resultIcons[0].className = "horse"+horseNo;
     if (resultIcons.length == 3){
         if(bethorse == "horse" + horseNo) {
-            funds+=amount; 
-            console.log("Won");
+            funds+=amount;
         } else {
             funds-=amount;
         }
