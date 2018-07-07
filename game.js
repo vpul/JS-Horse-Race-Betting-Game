@@ -22,7 +22,7 @@ var horseProp = [
     },
 ];
 
-var bethorse, amount, funds;
+var bethorse, amount, funds, lap=2;
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
     bethorse = document.getElementById('bethorse').value;
@@ -37,6 +37,7 @@ document.getElementById('start').onclick = function () {
         horse.classList.add("runRight");
         horse.classList.remove("standRight");
         horseProp[horseNo].left = 20;
+        lap--
         moveRight(horse, horseNo);
         horseNo++;
     }
