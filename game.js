@@ -22,13 +22,28 @@ var horseProp = [
     },
 ];
 
-var bethorse, amount, funds;
+var bethorse, amount, funds;  //Global variables
+
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
+    //Get the values from the DOM
     bethorse = document.getElementById('bethorse').value;
     amount = parseInt(document.getElementById('amount').value);
     laps = parseInt(document.getElementById('laps').value);
     funds = parseInt(document.getElementById('funds').innerText);
+
+    //Basic input validation
+    if (amount > funds) {
+        alert("You do not have enough funds.");
+        return 0;
+    } else if (lap < 1) {
+        alert("Lap must be greater than 0.");
+        return 0;
+    } else if (amount < 1) {
+        alert("Bet amount must be greater than 0.");
+        return 0;
+    }
+    
     hideResult();
     var horses = document.getElementsByClassName("horse");
     //Running Animation and actual movement for every horse
