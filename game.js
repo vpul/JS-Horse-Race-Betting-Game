@@ -22,7 +22,7 @@ var horseProp = [
     },
 ];
 
-var bethorse, amount, funds, laps;
+var bethorse, amount, funds;
 //Trigger the following when "start" button is clicked
 document.getElementById('start').onclick = function () {
     bethorse = document.getElementById('bethorse').value;
@@ -38,6 +38,7 @@ document.getElementById('start').onclick = function () {
         horse.classList.add("runRight");
         horse.classList.remove("standRight");
         horseProp[horseNo].left = 20;
+        horseProp[horseNo].laps = laps;
         moveRight(horse, horseNo);
         horseNo++;
     }
@@ -47,21 +48,21 @@ function moveRight(horse, horseNo) {
     setTimeout(() => {
         horseProp[horseNo].left ++;
         horse.style.left = horseProp[horseNo].left + "vw";
-        if (laps>0) {
-            if (horseProp[horseNo].left < 82.5 - (horseNo + 1) * 2.5) {
-                moveRight(horse, horseNo);
-            } else {
-                horseProp[horseNo].top = 68;
-                horse.classList.remove("runRight");
-                horse.classList.add("runUp");
-                moveUp(horse, horseNo);
-            }
+        if (horseProp[horseNo].laps > 0) {
+          if (horseProp[horseNo].left < 82.5 - (horseNo + 1) * 2.5) {
+            moveRight(horse, horseNo);
+          } else {
+            horseProp[horseNo].top = 68;
+            horse.classList.remove("runRight");
+            horse.classList.add("runUp");
+            moveUp(horse, horseNo);
+          }
         } else {
-            if (horseProp[horseNo].left < 30) {
-                moveRight(horse, horseNo);
-            } else {
-                arrival(horse, horseNo);
-            }
+          if (horseProp[horseNo].left < 30) {
+            moveRight(horse, horseNo);
+          } else {
+            arrival(horse, horseNo);
+          }
         }
     }, 500 / (Math.random() * 10 + 10));
 }
@@ -101,10 +102,7 @@ function moveDown(horse, horseNo) {
         if (horseProp[horseNo].top < 65 + horseNo * 4 ) {
             moveDown(horse, horseNo);
         } else {
-            //Following code ensures that laps count is reduced only once per laps
-            if (horseNo == 0) { //laps is reduced only in the case of 1st horse
-                laps--;
-            }
+            horseProp[horseNo].laps--;
             horse.classList.remove("runDown");
             horse.classList.add("runRight");
             moveRight(horse, horseNo);
