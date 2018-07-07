@@ -123,10 +123,10 @@ function arrival(horse, horseNo) {
     horseProp[horseNo].top = undefined;
     document.getElementById("start").disabled = false;
     var resultIcons = document.getElementsByClassName("results");
-    if (resultIcons.length == 3 && bethorse == "horse" + horseNo) {
-      console.log("Won");
-    }
     horseNo++;  //Arrays start with index 0, but the class names start with index 1
     resultIcons[0].className = "horse"+horseNo;
+    if (resultIcons.length == 3 && bethorse == "horse" + horseNo) {
+      console.log("horse" + horseNo + "Won");
+    }
     console.log(resultIcons.length);
 }
