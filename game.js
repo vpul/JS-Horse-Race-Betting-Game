@@ -57,6 +57,9 @@ function moveRight(horse, horseNo) {
             moveUp(horse, horseNo);
         }
     } else {
+        if (lap > 0) {
+            
+        }
         if (horseProp[horseNo].left < 30) {
           moveRight(horse, horseNo);
         } else {
