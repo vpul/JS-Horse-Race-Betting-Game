@@ -67,7 +67,7 @@ function moveRight(horse, horseNo) {
           if (horseProp[horseNo].left < 72.5 + horseNo * 2.5) {
             moveRight(horse, horseNo);
           } else {
-            horseProp[horseNo].top = 68;
+            horseProp[horseNo].top = 68 + (horseNo+1)*4;
             horse.classList.remove("runRight");
             horse.classList.add("runUp");
             moveUp(horse, horseNo);
@@ -79,7 +79,7 @@ function moveRight(horse, horseNo) {
             arrival(horse, horseNo);
           }
         }
-    }, 500 / (Math.random() * 10 + 10));
+    }, 1000/(Math.random() * 20 + 12));
 }
 
 function moveUp(horse, horseNo) {
@@ -93,7 +93,7 @@ function moveUp(horse, horseNo) {
             horse.classList.add("runLeft");
             moveLeft(horse, horseNo);
         }
-    }, 500 / (Math.random() * 10 + 10));
+    }, 1000/(Math.random() * 20 + 12));
 }
 
 function moveLeft(horse, horseNo) {
@@ -103,11 +103,13 @@ function moveLeft(horse, horseNo) {
         if (horseProp[horseNo].left > 3 + horseNo * 2.5) {
             moveLeft(horse, horseNo);
         } else {
+            
+
             horse.classList.remove("runLeft");
             horse.classList.add("runDown");
             moveDown(horse, horseNo);
         }
-    }, 500 / (Math.random() * 10 + 10));
+    }, 1000/(Math.random() * 20 + 12));
 }
 
 function moveDown(horse, horseNo) {
@@ -122,7 +124,7 @@ function moveDown(horse, horseNo) {
             horse.classList.add("runRight");
             moveRight(horse, horseNo);
         }
-    }, 500 / (Math.random() * 10 + 10));
+    }, 1000/(Math.random() * 20 + 12));
 }
 
 //Disable 'Start Race' button and hide results during the actual race
