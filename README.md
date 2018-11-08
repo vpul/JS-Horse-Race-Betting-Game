@@ -1,1 +1,1 @@
-# JS Horse Racing Game
+# JS Horse Race Betting Game
